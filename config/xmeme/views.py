@@ -8,6 +8,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -20,6 +21,14 @@ class MemeAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+
+        meme_count = Meme.objects.filter(**request.data).count()
+        if meme_count > 0:
+            return Response(
+                {"detail": "Meme already present by same author."},
+                status.HTTP_409_CONFLICT
+            )
+
         serializer = MemeSerializer(data=request.data)
 
         if serializer.is_valid():
@@ -31,7 +40,7 @@ class MemeAPIView(APIView):
 class MemeDetail(APIView):
 
     def get_object(self, id):
-        return Meme.objects.get(id=id)
+        return get_object_or_404(Meme, id=id)
 
     def get(self, request, id):
         meme = self.get_object(id)
