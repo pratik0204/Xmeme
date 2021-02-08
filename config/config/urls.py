@@ -7,9 +7,9 @@ from django.urls import path, include
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Meme API",
+        title="XMEME API",
         default_version='v1',
-        description="An API for managing memes",
+        description="CRUD API's for meme.",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@memes.remote"),
         license=openapi.License(name="TEST License"),
