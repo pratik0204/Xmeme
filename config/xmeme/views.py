@@ -9,32 +9,27 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+from rest_framework.generics import GenericAPIView
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
 
 # Create your views here.
 
 
-class MemeAPIView(APIView):
+class MemeAPIView(GenericAPIView, ListModelMixin, CreateModelMixin):
+    serializer_class = MemeSerializer
+    queryset = Meme.objects.all()
 
     def get(self, request):
-        memes = Meme.objects.all()
-        serializer = MemeSerializer(memes, many=True)
-        return Response(serializer.data)
+        return self.list(request)
 
     def post(self, request):
-
         meme_count = Meme.objects.filter(**request.data).count()
         if meme_count > 0:
             return Response(
                 {"detail": "Meme already present by same author."},
                 status.HTTP_409_CONFLICT
             )
-
-        serializer = MemeSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return self.create(request)
 
 
 class MemeDetail(APIView):
@@ -55,3 +50,8 @@ class MemeDetail(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id):
+        meme = meme = self.get_object(id)
+        meme.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
