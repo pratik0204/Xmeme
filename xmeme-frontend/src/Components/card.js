@@ -17,6 +17,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
+import {connect} from 'react-redux'
+import {deleteApiCall} from '../Redux/actionsDispatchers/deleteCall'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,8 +43,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard(props) {
+function MemeCard(props) {
   const classes = useStyles();
+
+  let handleClick=(e)=>{
+    e.preventDefault()
+    props.deleteMemes(props.id)
+  }
 
   return (
     <Card className={classes.root}>
@@ -75,7 +82,7 @@ export default function RecipeReviewCard(props) {
         <IconButton aria-label="add to favorites">
           <EditTwoToneIcon/>
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton onClick={handleClick} aria-label="share">
           <DeleteTwoToneIcon/>
         </IconButton>
       </CardActions>
@@ -83,3 +90,17 @@ export default function RecipeReviewCard(props) {
     </Card>
   );
 }
+
+const mapStateToProps = (state) =>{
+  return{
+    loading:state.loading
+  }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    deleteMemes:(id)=>dispatch(deleteApiCall(id)),
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MemeCard);

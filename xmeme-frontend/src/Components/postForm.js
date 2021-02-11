@@ -98,6 +98,7 @@ class Form extends Component {
                   label="First Name"
                   autoFocus
                   onChange={inputChangeHandler}
+                  placeholder="Ex: Pratik"
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -110,6 +111,7 @@ class Form extends Component {
                   name="lastName"
                   autoComplete="lname"
                   onChange={inputChangeHandler}
+                  placeholder="Ex: Chaudhary"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,6 +124,7 @@ class Form extends Component {
                   name="caption"
                   autoComplete="cp"
                   onChange={inputChangeHandler}
+                  placeholder="Be innovative with meme caption"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -134,6 +137,7 @@ class Form extends Component {
                   id="phurl"
                   autoComplete="url"
                   onChange={inputChangeHandler}
+                  placeholder="Ex: http://your-image-url.com"
                 />
               </Grid>
             </Grid>

@@ -1,6 +1,7 @@
 import faxios from '../../axios'
 import {store} from '../../index'
 import {getApiCall} from './getCalls'
+import {MyApp} from '../../Components/snack'
 
 const POST_MEMES='POST_MEMES'
 const POST_MEMES_SUCCESS='POST_MEMES_SUCCESS'
@@ -28,10 +29,11 @@ const postMemesFailure=(error)=>{
 
 export let postApiCall=(data)=>{
     return (dispatch)=>{
-        dispatch(postMemes)
-        faxios().post(`/memes/`,data).then(res=>{
+        dispatch(postMemes())
+        faxios().post(`/memes`,data).then(res=>{
             console.log(res)
             dispatch(getApiCall())
+            // {MyApp('Posted!','success')}
             dispatch(postMemesSuccess(res))  
          }).catch(err=>{
              console.log(err)

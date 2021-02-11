@@ -27,8 +27,8 @@ const getMemesFailure=(error)=>{
 
 export let getApiCall=()=>{
     return (dispatch)=>{
-        dispatch(getMemes)
-        faxios().get(`/memes/?page=${store.getState().page}`).then(res=>{
+        dispatch(getMemes())
+        faxios().get(`/memes/total/?page=${store.getState().page}`).then(res=>{
             let data=res.data;
             console.log(data)
             dispatch(getMemesSuccess(data))  

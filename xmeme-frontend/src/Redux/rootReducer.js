@@ -20,6 +20,10 @@ const POST_MEMES='POST_MEMES'
 const POST_MEMES_SUCCESS='POST_MEMES_SUCCESS'
 const POST_MEMES_FAILURE='POST_MEMES_FAILURE'
 
+const DELETE_MEMES='DELETE_MEMES'
+const DELETE_MEMES_SUCCESS='DELETE_MEMES_SUCCESS'
+const DELETE_MEMES_FAILURE='DELETE_MEMES_FAILURE'
+
 
 const rootReducer=(state=initState,action)=>{
 
@@ -73,6 +77,26 @@ const rootReducer=(state=initState,action)=>{
             }
         
         case POST_MEMES_FAILURE:
+            return{
+                ...state,
+                loading:false,
+                error:action.payload
+            }
+        
+        case DELETE_MEMES:
+            return{
+                ...state,
+                loading:true
+            }
+        
+        case DELETE_MEMES_SUCCESS:
+            return{
+                ...state,
+                loading:false,
+                error:''
+            }
+        
+        case DELETE_MEMES_FAILURE:
             return{
                 ...state,
                 loading:false,

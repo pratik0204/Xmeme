@@ -22,14 +22,30 @@ class MemeAPIView(GenericAPIView, ListModelMixin, CreateModelMixin):
     def get(self, request):
         return self.list(request)
 
+
+class MemeAPIView100(APIView):
+
+    def get(self, request):
+        memes = Meme.objects.all()
+        sliced = memes[0:min(len(memes), 100)]
+        serializer = MemeSerializer(sliced, many=True)
+        return Response(serializer.data)
+
     def post(self, request):
+
         meme_count = Meme.objects.filter(**request.data).count()
         if meme_count > 0:
             return Response(
                 {"detail": "Meme already present by same author."},
                 status.HTTP_409_CONFLICT
             )
-        return self.create(request)
+
+        serializer = MemeSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class MemeDetail(APIView):
