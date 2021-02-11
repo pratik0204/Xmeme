@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export let baseURL ="https://xmeme-pchy393-server.herokuapp.com/";
+export let baseURL ="http://localhost:8000";
 
 export default ()=>{
     return axios.create({

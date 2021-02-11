@@ -1,4 +1,4 @@
-
+import {store} from '../index'
 const initState={
     count:0,
     page:1,
@@ -6,6 +6,7 @@ const initState={
     prev:null,
     loading:false,
     error:'',
+    search:'',
     memes:[]
 }
 
@@ -23,6 +24,8 @@ const POST_MEMES_FAILURE='POST_MEMES_FAILURE'
 const DELETE_MEMES='DELETE_MEMES'
 const DELETE_MEMES_SUCCESS='DELETE_MEMES_SUCCESS'
 const DELETE_MEMES_FAILURE='DELETE_MEMES_FAILURE'
+
+const SEARCH_INITIATED='SEARCH'
 
 
 const rootReducer=(state=initState,action)=>{
@@ -101,6 +104,12 @@ const rootReducer=(state=initState,action)=>{
                 ...state,
                 loading:false,
                 error:action.payload
+            }
+        
+        case SEARCH_INITIATED:
+            return{
+                ...state,
+                search:action.payload
             }
 
         default:

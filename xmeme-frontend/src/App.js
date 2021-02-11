@@ -1,4 +1,4 @@
-import React, {Component } from 'react';
+import React, {Component ,Fragment} from 'react';
 import Navbar from './Components/navbar'
 import Search from './Components/search'
 import Form from './Components/postForm'
@@ -11,6 +11,7 @@ import {getApiCall} from './Redux/actionsDispatchers/getCalls'
 import Pages from './Components/pages'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {dateParser} from './dateParser'
 
 
 class App extends Component {
@@ -22,12 +23,29 @@ class App extends Component {
   render(){
     // console.log(this.props)
     const {memes}=this.props;
+    let bool=false;
+    const memeCards=memes.map((meme)=>{
 
-    const memeCards=memes.map((meme)=>(
-      <Grid key={meme.id} style={{display:'flex',justifyContent:"center",marginBottom:"25px"}} item xs={12} sm={12} md={6} lg={4}>
-          <Card name={meme.name} caption={meme.caption} picurl={meme.url} id={meme.id}/>
-      </Grid>
-    ))
+      let text=this.props.search
+      let show='none'
+      let x=text.length
+      if(x!==0){
+          if(meme.name.slice(0,x)===text || meme.caption.slice(0,x)===text){
+            show='flex'
+            bool=true;
+          }
+      }else{
+        show='flex'
+        bool=true;
+      }
+
+      return(
+          <Grid key={meme.id} style={{display:show,justifyContent:"center",marginBottom:"25px"}} item xs={12} sm={12} md={6} lg={4}>
+              <Card name={meme.name} caption={meme.caption} picurl={meme.url} id={meme.id} time={dateParser(meme.date)}/>
+          </Grid>
+      )
+      
+    })
 
     return (
       <div className="App">
@@ -48,9 +66,18 @@ class App extends Component {
         <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
           <Search/>
         </div>
-        <Grid container style={{marginTop:"80px"}}>
-          {memeCards}  
-        </Grid>
+        {!bool?<Fragment>
+          <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
+            No memes to show on this page!
+          </div>
+        </Fragment>:
+        <Fragment>
+          <Grid container style={{marginTop:"80px"}}>
+            {memeCards}
+          </Grid>
+        </Fragment>
+        }
+        
         <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
           <Pages/>
         </div>
@@ -63,7 +90,8 @@ class App extends Component {
 const mapStateToProps = (state) =>{
   return{
     memes:state.memes,
-    loading:state.loading
+    loading:state.loading,
+    search:state.search
   }
 }
 

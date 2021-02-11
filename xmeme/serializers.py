@@ -5,4 +5,4 @@ from .models import Meme
 class MemeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meme
-        fields = ['id', 'name', 'caption', 'url']
+        fields = ['id', 'name', 'caption', 'url', 'date']

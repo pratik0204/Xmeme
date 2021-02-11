@@ -32,9 +32,10 @@ export let postApiCall=(data)=>{
         dispatch(postMemes())
         faxios().post(`/memes`,data).then(res=>{
             console.log(res)
+            dispatch(postMemesSuccess(res))  
             dispatch(getApiCall())
             // {MyApp('Posted!','success')}
-            dispatch(postMemesSuccess(res))  
+            
          }).catch(err=>{
              console.log(err)
              dispatch(postMemesFailure(err))

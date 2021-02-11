@@ -15,7 +15,7 @@ class PaginationOutlined extends Component{
       <div style={{margin:"50px"}}>
         <Pagination
           page={this.props.page} 
-          count={Math.ceil(this.props.count/3)} 
+          count={Math.ceil(this.props.count/6)} 
           variant="outlined" 
           color="secondary" 
           onChange={handleChange}
