@@ -31,6 +31,7 @@ import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
 
 import {connect} from 'react-redux'
 import {deleteApiCall} from '../Redux/actionsDispatchers/deleteCall'
+import {updateApiCall} from '../Redux/actionsDispatchers/updateCall'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -103,6 +104,19 @@ const DialogActions = withStyles((theme) => ({
 function MemeCard(props) {
   const classes = useStyles();
 
+  const [updateCaption,setCaption]=React.useState(props.caption)
+  const [updateURL,setURL]=React.useState(props.picurl)
+
+  const captChange=(e)=>{
+    e.preventDefault()
+    setCaption(e.target.value)
+  }
+
+  const URLChange=(e)=>{
+    e.preventDefault()
+    setURL(e.target.value)
+  }
+
   const [open, setOpen] = React.useState(false);
 
   const [open2, setOpen2] = React.useState(false);
@@ -125,6 +139,14 @@ function MemeCard(props) {
   let handleClick=(e)=>{
     e.preventDefault()
     props.deleteMemes(props.id)
+  }
+
+  let Update=()=>{
+    let data={
+      caption:updateCaption,
+      url:updateURL
+    }
+    props.updateMemes(data,props.id)
   }
 
   return (
@@ -158,35 +180,37 @@ function MemeCard(props) {
             disabled
             fullWidth
             value={props.name}
+            
           />
 
           <TextField
-            autoFocus
+            
             margin="dense"
             id="caption"
             label="Caption"
             type="caption"
             fullWidth
             placeholder="Be innovative with caption"
-            value={props.caption}
+            value={updateCaption}
+            onChange={captChange}
           />
 
           <TextField
-            autoFocus
             margin="dense"
             id="url"
             label="Meme URL"
             type="name"
             fullWidth
             placeholder="Ex: http://your-meme-url.com"
-            value={props.picurl}
+            value={updateURL}
+            onChange={URLChange}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseForm} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleCloseForm} color="info">
+          <Button onClick={()=>{Update();handleCloseForm()}} color="info">
             Update
           </Button>
         </DialogActions>
@@ -243,6 +267,7 @@ const mapStateToProps = (state) =>{
 const mapDispatchToProps=(dispatch)=>{
   return{
     deleteMemes:(id)=>dispatch(deleteApiCall(id)),
+    updateMemes:(data,id)=>dispatch(updateApiCall(data,id))
   }
 }
 

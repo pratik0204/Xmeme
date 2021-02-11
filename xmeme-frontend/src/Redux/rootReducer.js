@@ -27,6 +27,9 @@ const DELETE_MEMES_FAILURE='DELETE_MEMES_FAILURE'
 
 const SEARCH_INITIATED='SEARCH'
 
+const UPDATE_MEMES='UPDATE_MEMES'
+const UPDATE_MEMES_SUCCESS='UPDATE_MEMES_SUCCESS'
+const UPDATE_MEMES_FAILURE='UPDATE_MEMES_FAILURE'
 
 const rootReducer=(state=initState,action)=>{
 
@@ -111,7 +114,27 @@ const rootReducer=(state=initState,action)=>{
                 ...state,
                 search:action.payload
             }
-
+        
+        case UPDATE_MEMES:
+            return{
+                ...state,
+                loading:true
+            }
+        
+        case UPDATE_MEMES_SUCCESS:
+            return{
+                ...state,
+                loading:false,
+                error:''
+            }
+        
+        case UPDATE_MEMES_FAILURE:
+            return{
+                ...state,
+                loading:false,
+                error:action.payload
+            }
+        
         default:
             return state
         
