@@ -8,6 +8,9 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { IconButton } from '@material-ui/core';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -40,15 +43,26 @@ export default function ElevateAppBar(props) {
       <CssBaseline />
       <ElevationScroll {...props}>
         <AppBar color={"secondary"}>
-          <Toolbar>
-            <Typography style={{paddingLeft:"3%",fontWeight:"bold"}} variant="h5">XMEME</Typography>
+          <Toolbar >
+            <div style={{margin:"auto"}}>
+              
+              <Typography style={{fontWeight:"bold",display:"flex",alignItems:"center"}} variant="h4">
+                <IconButton style={{margin:"0 10px"}} >
+                  <a href="https://github.com/pratik0204"><GitHubIcon style={{color:"white",width:"30px",height:"30px"}}/></a>
+                </IconButton>
+                X-MEME
+                <IconButton style={{margin:"0 10px"}}>
+                  <a href="https://www.linkedin.com/in/pratik-chaudhary-73a77416a/"><LinkedInIcon style={{color:"white",width:"38px",height:"38px"}}/></a>
+                </IconButton> 
+                </Typography>
+            </div>
           </Toolbar>
         </AppBar>
       </ElevationScroll>
       <ElevationScroll>
       <AppBar position="fixed" color="primary" style={{top:'auto',bottom:0}} >
         <div style={{display:'flex',justifyContent:'center'}}>
-            <Typography style={{textAlign:"center",fontWeight:"bold",color:"white",fontSize:"13px"}}>
+            <Typography style={{textAlign:"center",fontWeight:"bold",color:"white",fontSize:"15px"}}>
                 Designed by @ <a style={{textDecoration:'none',color:"white",fontStyle:'italic'}} href="https://github.com/pratik0204">Pratik Chaudhary</a> under <a href="https://www.crio.do/" style={{textDecoration:'none',color:"white",fontStyle:'italic'}}>Crio.do</a>
             </Typography>
         </div>

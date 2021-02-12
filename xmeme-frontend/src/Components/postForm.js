@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {postApiCall} from '../Redux/actionsDispatchers/postCall'
 import {getApiCall} from '../Redux/actionsDispatchers/getCalls'
+import Error from '../Components/error'
 
 const styles = theme =>({
   paper: {
@@ -75,7 +76,7 @@ class Form extends Component {
 
     const {classes} = this.props;
     return (
-      <Container component="main" maxWidth="md">
+      <Container component="main" maxWidth="sm">
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -157,6 +158,7 @@ class Form extends Component {
             </Button>
           </form>
         </div>
+        <Error/>
       </Container>
     );
   }
