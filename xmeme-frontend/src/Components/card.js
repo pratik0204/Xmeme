@@ -28,15 +28,18 @@ import { red } from '@material-ui/core/colors';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
+import ShareIcon from '@material-ui/icons/Share';
 
 import {connect} from 'react-redux'
 import {deleteApiCall} from '../Redux/actionsDispatchers/deleteCall'
 import {updateApiCall} from '../Redux/actionsDispatchers/updateCall'
 
+import ReactCopyToClipboardUI from 'react-copy-to-clipboard-ui';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 800,
-    minWidth:350
+    minWidth:350,
   },
   media: {
     height: 0,
@@ -120,6 +123,7 @@ function MemeCard(props) {
   const [open, setOpen] = React.useState(false);
 
   const [open2, setOpen2] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
 
   const handleClickOpenForm = () => {
     setOpen2(true);
@@ -127,6 +131,14 @@ function MemeCard(props) {
 
   const handleCloseForm = () => {
     setOpen2(false);
+  };
+
+  const handleClick3 = () => {
+    setOpen3(true);
+  };
+
+  const handleClose3 = () => {
+    setOpen3(false);
   };
 
   const handleClickOpenPic = () => {
@@ -151,6 +163,49 @@ function MemeCard(props) {
 
   return (
     <div>
+      <Dialog onClose={handleClose3} aria-labelledby="simple-dialog-title" open={open3}>
+        <DialogTitle id="simple-dialog-title">Share this Awesome Meme!</DialogTitle>
+        <ReactCopyToClipboardUI
+          containerStyle={{
+            margin:"20px",
+            border:"2px dashed grey",
+
+          }}
+
+          activeContainerStyle={{
+            margin:"20px",
+            border:"2px dashed red",
+            borderRadius:0
+          }}
+          textStyle={{
+            overflow:"hidden",
+            color:"crimson",
+            fontWeight:"bold"
+          }}
+
+          activeTextStyle={{
+            overflow:"hidden",
+            color:"grey",
+            fontWeight:"bold"
+          }}
+
+          copyText={props.picurl}
+
+          btnStyle={{
+            display:"block",
+            fontWeight:"bold",
+            fontSize:"15px",
+            width:"100px",
+            padding:"5px !important",
+            backgroundColor:"#C0C0C0 !important"
+          }}
+          btnLabel="Copy"
+          onCopyBtnLabel="Copied!"
+
+        >
+          {props.picurl}
+        </ReactCopyToClipboardUI>
+      </Dialog>
       <Dialog onClose={handleClosePic} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClosePic}>
           {props.caption}
@@ -210,25 +265,30 @@ function MemeCard(props) {
           <Button onClick={handleCloseForm} color="primary">
             Cancel
           </Button>
-          <Button onClick={()=>{Update();handleCloseForm()}} color="info">
+          <Button onClick={()=>{Update();handleCloseForm()}}>
             Update
           </Button>
         </DialogActions>
       </Dialog>
 
-      <Card className={classes.root}>
+      <Card elevation={10} className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            {props.name.slice(0,2)}
+          <Avatar aria-label="recipe" style={{fontSize:"15px",fontWeight:"bold"}} className={classes.avatar}>
+            {props.name.slice(0,2).toUpperCase()}
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton color="primary" onClick={handleClick3} aria-label="share">
+            <ShareIcon />
           </IconButton>
         }
-        title={props.name}
+        
+        title={
+          <div style={{fontWeight:"bold"}}>
+            {props.name}
+          </div>
+        }
         // subheader="September 14, 2016"
         subheader={`${props.time.month} ${props.time.date}, ${props.time.year}`}
       />
@@ -245,12 +305,13 @@ function MemeCard(props) {
       />
       
       <CardActions disableSpacing>
-        <IconButton onClick={handleClickOpenForm} aria-label="add to favorites">
+        <IconButton color="primary" onClick={handleClickOpenForm} aria-label="add to favorites">
           <EditTwoToneIcon/>
         </IconButton>
-        <IconButton onClick={handleClick} aria-label="share">
+        <IconButton color="secondary" onClick={handleClick} aria-label="share">
           <DeleteTwoToneIcon/>
         </IconButton>
+        
       </CardActions>
       
      </Card>

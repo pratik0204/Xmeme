@@ -53,7 +53,7 @@ class CustomizedInputBase extends Component {
     }
 
     return (
-      <Paper component="form" className={classes.root}>
+      <Paper elevation={5} component="form" className={classes.root}>
         
         <InputBase
           className={classes.input}

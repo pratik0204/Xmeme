@@ -33,7 +33,7 @@ export let deleteApiCall=(id)=>{
             dispatch(getApiCall())
          }).catch(err=>{
              console.log(err)
-             dispatch(deleteMemesFailure(err))
+             dispatch(deleteMemesFailure(err.response))
          })
     }
 }

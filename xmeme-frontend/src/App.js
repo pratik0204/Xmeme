@@ -11,9 +11,11 @@ import {getApiCall} from './Redux/actionsDispatchers/getCalls'
 import Pages from './Components/pages'
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {dateParser} from './dateParser'
-
-
+import {dateParser} from './dateParser';
+import ArrowDropDownCircleIcon from '@material-ui/icons/ArrowDropDownCircle';
+import IconButton from '@material-ui/core/IconButton';
+import SentimentDissatisfiedIcon from '@material-ui/icons/SentimentDissatisfied';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 class App extends Component {
 
   componentDidMount(){
@@ -22,6 +24,11 @@ class App extends Component {
 
   render(){
     // console.log(this.props)
+
+    // let scrollToBottom=()=>{
+    //   this.appp.scrollIntoView({ behavior: "smooth" })
+    // }
+
     const {memes}=this.props;
     let bool=false;
     const memeCards=memes.map((meme)=>{
@@ -48,7 +55,8 @@ class App extends Component {
     })
 
     return (
-      <div className="App">
+      <div  className="App">
+        
         <Backdrop style={{zIndex:100,color:"#fff"}} open={this.props.loading}>
           <CircularProgress color="inherit" />
         </Backdrop>
@@ -58,29 +66,51 @@ class App extends Component {
         </div>
         <Divider variant="middle" />
         <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
-          <Typography component="h1" variant="h4">
+          <Typography style={{fontWeight:"bold"}} component="h1" variant="h4">
               Memes
           </Typography>
         </div>
-        
         <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
           <Search/>
         </div>
+        <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
+          <Pages/>
+        </div>
         {!bool?<Fragment>
-          <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
-            No memes to show on this page!
+          <div style={{display:'flex',justifyContent:"center",alignItems:"center",flexDirection:"column",margin:"20px"}}>
+            <SentimentDissatisfiedIcon style={{width:"80px",height:"80px"}}/>
+            <Typography style={{fontWeight:"bold",fontSize:"20px"}}>
+              No memes to show on this page! Add Memes Now!
+            </Typography>
+            
           </div>
         </Fragment>:
         <Fragment>
-          <Grid container style={{marginTop:"80px"}}>
-            {memeCards}
-          </Grid>
+          <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
+            <Grid container style={{marginTop:"40px",maxWidth:"1500px"}}>
+                {this.props.memes.length===0?<Fragment>
+                  <div style={{display:'flex',justifyContent:"center",alignItems:"center",flexDirection:"column",margin:"20px"}}>
+                    <SentimentVeryDissatisfiedIcon style={{width:"80px",height:"80px"}}/>
+                    <Typography style={{fontWeight:"bold",fontSize:"20px"}}>
+                       You haven't added any meme yet!
+                    </Typography>
+            
+                  </div>
+                </Fragment>:memeCards}
+            </Grid>
+          </div>
         </Fragment>
         }
         
         <div style={{display:'flex',justifyContent:"center",margin:"20px"}}>
-          <Pages/>
+          <Pages ref={ele=>this.appp=ele}/>
         </div>
+
+        {/* <div style={{position:'fixed',bottom:"4vh",right:"1vw"}}>
+          <IconButton onClick={scrollToBottom} >
+            <ArrowDropDownCircleIcon style={{width:"45px",height:"45px",color:"black"}} />
+          </IconButton>
+        </div> */}
        
       </div>
     );

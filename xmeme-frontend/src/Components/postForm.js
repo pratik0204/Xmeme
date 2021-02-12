@@ -28,13 +28,13 @@ const styles = theme =>({
   },
   avatar: {
     margin: "20px",
-    backgroundColor: "#bdb715",
-    width: "60px",
-    height: "40px",
+    backgroundColor: "blue",
+    width: "80px",
+    height: "80px",
   },
   large:{
-    width: "60px",
-    height: "60px",
+    width: "80px",
+    height: "80px",
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -79,10 +79,10 @@ class Form extends Component {
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-            <InsertEmoticonIcon className={classes.large}/>
+            <InsertEmoticonIcon color="white" className={classes.large}/>
           </Avatar>
           
-          <Typography component="h1" variant="h4">
+          <Typography style={{fontWeight:"bold",textAlign:"center"}} component="h1" variant="h4">
               Post your Memes Here!
           </Typography>
           <form className={classes.form} noValidate>
@@ -145,9 +145,13 @@ class Form extends Component {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={classes.submit}
               onClick={handleClick}
+              style={{
+                fontSize:"15px",
+                fontWeight:"bold"
+              }}
             >
               Submit
             </Button>

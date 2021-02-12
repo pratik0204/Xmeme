@@ -12,7 +12,7 @@ class PaginationOutlined extends Component{
         this.props.reloadPage()
     }
     return (
-      <div style={{margin:"50px"}}>
+      <div style={{margin:"20px 0"}}>
         <Pagination
           page={this.props.page} 
           count={Math.ceil(this.props.count/6)} 

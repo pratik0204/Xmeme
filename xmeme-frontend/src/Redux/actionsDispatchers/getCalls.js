@@ -34,7 +34,7 @@ export let getApiCall=()=>{
             dispatch(getMemesSuccess(data))  
          }).catch(err=>{
              console.log(err)
-             dispatch(getMemesFailure(err))
+             dispatch(getMemesFailure(err.response))
          })
     }
 }

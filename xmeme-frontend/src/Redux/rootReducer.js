@@ -5,7 +5,7 @@ const initState={
     next:null,
     prev:null,
     loading:false,
-    error:'',
+    error:[],
     search:'',
     memes:[]
 }
@@ -31,6 +31,8 @@ const UPDATE_MEMES='UPDATE_MEMES'
 const UPDATE_MEMES_SUCCESS='UPDATE_MEMES_SUCCESS'
 const UPDATE_MEMES_FAILURE='UPDATE_MEMES_FAILURE'
 
+const CLEAR_ERROR='CLEAR_ERROR'
+
 const rootReducer=(state=initState,action)=>{
 
     switch(action.type){
@@ -53,7 +55,7 @@ const rootReducer=(state=initState,action)=>{
             return{
                 ...state,
                 loading:false,
-                error:action.payload
+                error:action.payload.data
             }
         
         case GET_PAGE:
@@ -86,7 +88,7 @@ const rootReducer=(state=initState,action)=>{
             return{
                 ...state,
                 loading:false,
-                error:action.payload
+                error:action.payload.data
             }
         
         case DELETE_MEMES:
@@ -106,7 +108,7 @@ const rootReducer=(state=initState,action)=>{
             return{
                 ...state,
                 loading:false,
-                error:action.payload
+                error:action.payload.data
             }
         
         case SEARCH_INITIATED:
@@ -132,7 +134,13 @@ const rootReducer=(state=initState,action)=>{
             return{
                 ...state,
                 loading:false,
-                error:action.payload
+                error:action.payload.data
+            }
+        
+        case CLEAR_ERROR:
+            return{
+                ...state,
+                error:''
             }
         
         default:
