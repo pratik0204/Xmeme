@@ -3,50 +3,80 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import {connect} from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    '& > * + *': {
-      marginTop: theme.spacing(2),
-    },
-  },
-}));
+class DescriptionAlerts extends React.Component{
 
-function DescriptionAlerts(props) {
-  const classes = useStyles();
+  errorAl=[];
 
-  const [warning,setWarn]=React.useState('none')
-  const[error,setError]=React.useState('none')
-  const[success,setSucc]=React.useState('none')
-  const[info,setInfo]=React.useState('none')
+  size = (obj)=> {
+    var size = 0,
+      key;
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+  };
 
-  {console.log(JSON.stringify(props.err))}
+  render(){
 
-  return (
-    <div className={classes.root}>
-      <Alert style={{display:error}} severity="error">
-        <AlertTitle>Error</AlertTitle>
-        This is an error alert — <strong>check it out!</strong>
-      </Alert>
-      <Alert style={{display:warning}} severity="warning">
-        <AlertTitle>Warning</AlertTitle>
-        This is a warning alert — <strong>check it out!</strong>
-      </Alert>
-      <Alert style={{display:info}} severity="info">
-        <AlertTitle>Update</AlertTitle>
-        This is an info alert — <strong>check it out!</strong>
-      </Alert>
-      <Alert style={{display:success}}  severity="success">
-        <AlertTitle>Success</AlertTitle>
-        This is a success alert — <strong>check it out!</strong>
-      </Alert>
-    </div>
-  );
+    {console.log(this.props.err)}
+
+    {if(this.size(this.props.err)===3){
+      this.errorAl=[];
+      this.errorAl.push(<Alert style={{margin:"15px"}} severity="error">
+      <AlertTitle>Error</AlertTitle>
+        First Name — <strong>{this.props.err.name}</strong>
+      </Alert>)
+
+      this.errorAl.push(<Alert style={{margin:"15px"}} severity="error">
+      <AlertTitle>Error</AlertTitle>
+        Caption — <strong>{this.props.err.caption}</strong>
+      </Alert>)
+
+      this.errorAl.push(<Alert style={{margin:"15px"}} severity="error">
+      <AlertTitle>Error</AlertTitle>
+        Photo URL — <strong>{this.props.err.url}</strong>
+      </Alert>)
+  }else if(this.size(this.props.err)===1){
+    this.errorAl=[];
+    this.errorAl.push(<Alert severity="error">
+    <AlertTitle>Error</AlertTitle>
+        <strong>{this.props.err.detail}</strong>
+    </Alert>)
+  }}
+
+  {if(this.props.succ){
+    this.errorAl=[];
+    this.errorAl.push(<Alert severity="success">
+    <AlertTitle>Success</AlertTitle>
+        <strong>Your performed action was succesful.</strong>
+    </Alert>)
+  }}
+
+    return (
+      <div>
+       
+        {/* <Alert style={{display:warning}} severity="warning">
+          <AlertTitle>Warning</AlertTitle>
+          This is a warning alert — <strong>check it out!</strong>
+        </Alert>
+        <Alert style={{display:info}} severity="info">
+          <AlertTitle>Update</AlertTitle>
+          This is an info alert — <strong>check it out!</strong>
+        </Alert>
+        <Alert style={{display:success}}  severity="success">
+          <AlertTitle>Success</AlertTitle>
+          This is a success alert — <strong>check it out!</strong>
+        </Alert> */}
+        {this.errorAl}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state) =>{
     return{
-      err:state.error
+      err:state.error,
+      succ:state.success
     }
   }
 

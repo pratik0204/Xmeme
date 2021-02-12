@@ -7,7 +7,8 @@ const initState={
     loading:false,
     error:[],
     search:'',
-    memes:[]
+    memes:[],
+    success:false
 }
 
 const GET_MEMES='GET_MEMES'
@@ -39,7 +40,9 @@ const rootReducer=(state=initState,action)=>{
         case GET_MEMES:
             return{
                 ...state,
-                loading:true
+                loading:true,
+                error:'',
+                success:false
             }
         
         case GET_MEMES_SUCCESS:
@@ -48,33 +51,38 @@ const rootReducer=(state=initState,action)=>{
                 loading:false,
                 count:action.payload.count,
                 memes:action.payload.results,
-                error:''
+                error:'',
             }
         
         case GET_MEMES_FAILURE:
             return{
                 ...state,
                 loading:false,
-                error:action.payload.data
+                error:action.payload.data,
+                success:false
             }
         
         case GET_PAGE:
             return{
                 ...state,
-                loading:true
+                loading:true,
+                error:'',
+                success:false
             }
         
         case GET_PAGE_SUCCESS:
             return{
                 ...state,
                 loading:false,
-                page:action.payload
+                page:action.payload,
             }
         
         case POST_MEMES:
             return{
                 ...state,
-                loading:true
+                loading:true,
+                error:'',
+                success:false
             }
         
         case POST_MEMES_SUCCESS:
@@ -82,59 +90,71 @@ const rootReducer=(state=initState,action)=>{
                 ...state,
                 loading:false,
                 error:'',
+                success:true
             }
         
         case POST_MEMES_FAILURE:
             return{
                 ...state,
                 loading:false,
-                error:action.payload.data
+                error:action.payload.data,
+                success:false,
             }
         
         case DELETE_MEMES:
             return{
                 ...state,
-                loading:true
+                loading:true,
+                error:'',
+                success:false
             }
         
         case DELETE_MEMES_SUCCESS:
             return{
                 ...state,
                 loading:false,
-                error:''
+                error:'',
+                success:true
             }
         
         case DELETE_MEMES_FAILURE:
             return{
                 ...state,
                 loading:false,
-                error:action.payload.data
+                error:action.payload.data,
+                success:false
             }
         
         case SEARCH_INITIATED:
             return{
                 ...state,
-                search:action.payload
+                search:action.payload,
+                error:'',
+                success:false
             }
         
         case UPDATE_MEMES:
             return{
                 ...state,
-                loading:true
+                loading:true,
+                error:'',
+                success:false
             }
         
         case UPDATE_MEMES_SUCCESS:
             return{
                 ...state,
                 loading:false,
-                error:''
+                error:'',
+                success:true
             }
         
         case UPDATE_MEMES_FAILURE:
             return{
                 ...state,
                 loading:false,
-                error:action.payload.data
+                error:action.payload.data,
+                success:false
             }
         
         case CLEAR_ERROR:
