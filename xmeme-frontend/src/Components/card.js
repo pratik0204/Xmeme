@@ -262,10 +262,10 @@ function MemeCard(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseForm} color="primary">
+          <Button style={{fontWeight:"bold"}} onClick={handleCloseForm} color="secondary">
             Cancel
           </Button>
-          <Button onClick={()=>{Update();handleCloseForm()}}>
+          <Button style={{fontWeight:"bold"}} color="primary" onClick={()=>{Update();handleCloseForm()}}>
             Update
           </Button>
         </DialogActions>
