@@ -38,21 +38,24 @@ curl --location --request GET 'http://localhost:8081/memes'
 
 # Execute the POST /memes endpoint using curl
 
-curl --location --request POST 'http://localhost:8081/memes' \
+# curl --location --request POST 'http://localhost:8081/memes' \
 
---header 'Content-Type: application/json' \
+# --header 'Content-Type: application/json' \
 
---data-raw '{
+# --data-raw '{
 
-"name": "xyz",
+# "name": "xyz",
 
-"url": "http://abc.com",
+# "url": "http://abc.com",
 
-"caption": "This is a meme"
+# "caption": "This is a meme"
 
-}'
+# }'
 
-
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"name": "linuxize", "url": "http://abc.com","caption":"hello"}' \
+    http://localhost:8081/memes
+    
 # Execute the GET /memes endpoint using curl
 
 curl --location --request GET 'http://localhost:8081/memes'
