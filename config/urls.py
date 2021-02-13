@@ -9,7 +9,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="XMEME API",
         default_version='v1',
-        description="CRUD API's for meme.",
+        description="CRUD API's for Xmeme under Crio.do",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="contact@memes.remote"),
         license=openapi.License(name="TEST License"),
