@@ -62,7 +62,7 @@ export default function ElevateAppBar(props) {
       <ElevationScroll>
       <AppBar position="fixed" color="primary" style={{top:'auto',bottom:0}} >
         <div style={{display:'flex',justifyContent:'center'}}>
-            <Typography style={{textAlign:"center",fontWeight:"bold",color:"white",fontSize:"15px"}}>
+            <Typography style={{textAlign:"center",fontWeight:"bold",fontSize:"15px"}}>
                 Designed by @ <a style={{textDecoration:'none',color:"white",fontStyle:'italic'}} href="https://github.com/pratik0204">Pratik Chaudhary</a> under <a href="https://www.crio.do/" style={{textDecoration:'none',color:"white",fontStyle:'italic'}}>Crio.do</a>
             </Typography>
         </div>
