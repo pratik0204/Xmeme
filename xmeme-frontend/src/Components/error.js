@@ -48,7 +48,7 @@ class DescriptionAlerts extends React.Component{
     this.errorAl=[];
     this.errorAl.push(<Alert severity="success">
     <AlertTitle>Success</AlertTitle>
-        <strong>Your performed action was succesful.</strong>
+        <strong>Your performed action was successful.</strong>
     </Alert>)
   }}
 
