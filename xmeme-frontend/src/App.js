@@ -66,13 +66,13 @@ class App extends Component {
         <Navbar/>
 
         <Grid container>
-          <Grid  style={{display:'flex',justifyContent:"center",alignItems:"center",borderRight:"3px groove grey"}} item xs={12} sm={12} md={12} lg={4}>
+          <Grid  style={{display:'flex',justifyContent:"center",alignItems:"center",borderRight:"3px groove grey"}} item xs={12} sm={12} md={12} lg={3}>
             <div >
               <Form/>
             </div>
           </Grid>
            {/* {<Divider orientation="vertical"/>} */}
-          <Grid item xs={12} sm={12} md={12} lg={8}>
+          <Grid item xs={12} sm={12} md={12} lg={9}>
             
             
             <div style={{position:"relative",width:"100%",height:"90vh",overflow:"scroll"}}>

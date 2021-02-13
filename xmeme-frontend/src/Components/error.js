@@ -36,7 +36,7 @@ class DescriptionAlerts extends React.Component{
       <AlertTitle>Error</AlertTitle>
         Photo URL — <strong>{this.props.err.url}</strong>
       </Alert>)
-  }else if(this.size(this.props.err)===1){
+  }else if(this.size(this.props.err)>=1){
     this.errorAl=[];
     this.errorAl.push(<Alert severity="error">
     <AlertTitle>Error</AlertTitle>
