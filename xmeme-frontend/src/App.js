@@ -48,7 +48,7 @@ class App extends Component {
       }
 
       return(
-          <Grid key={meme.id} style={{display:show,justifyContent:"center",marginBottom:"25px"}} item xs={12} sm={12} md={6} lg={4}>
+          <Grid key={meme.id} style={{display:show,justifyContent:"center",marginBottom:"20px"}} item xs={12} sm={12} md={6} lg={4}>
               <Card name={meme.name} caption={meme.caption} picurl={meme.url} id={meme.id} time={dateParser(meme.date)}/>
           </Grid>
       )

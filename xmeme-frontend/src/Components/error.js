@@ -40,7 +40,8 @@ class DescriptionAlerts extends React.Component{
     this.errorAl=[];
     this.errorAl.push(<Alert severity="error">
     <AlertTitle>Error</AlertTitle>
-        <strong>{this.props.err.detail}</strong>
+        
+        <strong>{JSON.stringify(this.props.err)}</strong>
     </Alert>)
   }}
 
