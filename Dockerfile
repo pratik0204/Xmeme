@@ -1,5 +1,5 @@
 #Python and Linux Version
-FROM python:3.10.0a1-alpine3.12
+FROM python:3.8.3-slim-buster
 
 COPY requirements.txt /app/requirements.txt
 
